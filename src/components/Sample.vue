@@ -7,9 +7,19 @@ const Title = ref("");
 const Author = ref("");
 const subject = ref("");
 const category = ref("");
+const inputValue = ref("");
+const file = ref("");
 
 async function testUpload() {
   const pb = new PocketBase("http://127.0.0.1:8090");
+  const formData = new FormData();
+
+  const fileInput = document.getElementById("fileInput");
+  for (let file of fileInput.files) {
+    formData.append("documents", file);
+  }
+
+  formData.append("title", "Hello world!");
 
   // example create data
   const data = {
@@ -18,11 +28,13 @@ async function testUpload() {
     Author_name: Author.value,
     subject: subject.value,
     category: category.value,
+    file: fileInput.value
   };
+
   const record = await pb.collection("Notes").create(data);
+
   alert("DONE!");
 }
-//
 
 function handleChange(event) {
   console.log(event.target.value);
@@ -57,7 +69,7 @@ function sendNote() {
               placeholder="Title"
               @input="(event) => (text = console.logevent.target.value)"
             />
-            />
+
             <div class="mt-5">
               <label
                 for="Author"
@@ -66,7 +78,7 @@ function sendNote() {
                 Author</label
               >
               <input
-              v-model="Author"
+                v-model="Author"
                 type="text"
                 name="Author"
                 id="Author"
@@ -92,16 +104,16 @@ function sendNote() {
             </div>
             <div class="mt-5">
               <label
-                for="sub"
+                for="file"
                 class="text-gray-900 font-bold font-serif leading-6"
               >
                 Upload file</label
               >
               <input
-                
+                v-bind="fileInput"
                 type="file"
-                name="subject"
-                id="sub"
+                name="notefile"
+                id="fileInput"
                 class="block flex-1 border bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-gray-700"
                 placeholder="Subject/course"
               />
@@ -113,10 +125,14 @@ function sendNote() {
               >
                 Category *</label
               >
-              <select name="category" id="category">
-                <option value="highschool">High school</option>
-                <option value="undergraduate">undergraduate</option>
-              </select>
+              <input
+                v-model="category"
+                type="text"
+                name="Category"
+                id="category"
+                class="w-full flex-1 border bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-gray-700"
+                placeholder="category"
+              />
             </div>
 
             <input type="button" v-model="inputValue" />
@@ -127,7 +143,7 @@ function sendNote() {
               Submit
             </button>
             <ul>
-              <li v-for="usernote in Notes" {{ usernote }}></li>
+              <li v-for="usernote in Notes">{{ usernote }}</li>
             </ul>
           </form>
         </div>
