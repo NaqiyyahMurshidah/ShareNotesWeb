@@ -1,61 +1,97 @@
-<script setup>
-import { ref } from "vue"; //to box it if nks something count
-let count = ref(0);
-let inputValue = ref("");
-let todos = ref([]);
-
-function search() {}
-</script>
-
 <template>
+  <div class="">
   <div
-    class="grid justify-items-center md:justify-items-center bg-yellow-100 h-screen"
+    class="my-[5rem] bg-yellow-100 h-screen"
   >
-    <div class="flex flex-row justify-center items-center">
-      <img
-        src="C:\Users\User\Downloads\Sharing is love.png"
-        object-contanin
-        height="10"
-        width="500rem"
-        class=""
-      />
-    </div>
-
-    <div class="flex flex-row gap-10">
-      <RouterLink to="/highschool">
-        <div>
-          <div class="relative">
-            <img
-              src="C:\Users\User\Downloads\download__2_-removebg-preview.png"
-              height="56"
-              width="500rem"
-              class="object-contain"
-            />
-            <div
-              class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center"
+    <div
+      class="card animation "
+    >
+      <header class="card-header">
+        <h2 class="card-header-title">{{ title }}</h2>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <p>
+            <strong>{{ description }}:</strong> {{ value }}
+          </p>
+          <h4 class="">Additional Info</h4>
+          <ul>
+            <li>Information for high school students</li>
+            <li>Information for undergraduate students</li>
+            <li>General information</li>
+          </ul>
+          <br />
+          <div class="buttons gap-2">
+            <RouterLink to="/highschool">
+            <button
+              class="button is-primary transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
             >
-              <p class="font-serif font-semibold text-3xl">High School</p>
-            </div>
+              High School
+            </button></RouterLink>
+            <RouterLink to="/undergraduate">
+            <button
+              class="button is-primary transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+            >
+              Undergraduate
+            </button></RouterLink>
           </div>
         </div>
-      </RouterLink>
-      <RouterLink to="/undergraduate">
-        <div>
-          <div class="relative">
-            <img
-              src="C:\Users\User\Downloads\download__2_-removebg-preview.png"
-              height="56"
-              width="500rem"
-              class="object-contain"
-            />
-            <div
-              class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center"
-            >
-              <p class="font-serif font-semibold text-3xl">undergraduate</p>
-            </div>
-          </div>
-        </div>
-      </RouterLink>
+      </div>
     </div>
   </div>
+  </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: "Welcome to share notes",
+      description:
+        "This website are allow you to share your pretty notes among your friends",
+      //value: '',
+    };
+  },
+
+  theme: {
+    extend: {
+      animation: {
+        wiggle: "wiggle 1s ease-in-out infinite",
+      },
+    },
+  },
+};
+</script>
+
+<style scoped>
+@import "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css";
+
+.card {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #6f7479;
+  color: white;
+  padding: 15px;
+  border-radius: 5px 5px 0 0;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.card-content li {
+  padding: 5px 0;
+}
+</style>
