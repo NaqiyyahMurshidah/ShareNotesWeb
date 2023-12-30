@@ -3,48 +3,41 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <div class="min-h-screen min-w-full bg-yellow-100">
-    <div
-      class="flex flex-row flex-wrap justify-center p-[9rem] gap-20 text-center"
-    >
+  <div class="min-h-screen min-w-full  ">
+    <div class="p-[20px] font-serif flex flex-col items-center mt-10">
+      <div>Notes:</div>
       <RouterLink to="/database">
         <div
-          class="rounded-full bg-gray-200 border border-black hover:bg-purple-300 active:bg-purple-900 h[200px] w-[190px] h-full"
+          class="w-[800px] hover:bg-zinc-200 bg-zinc-100 border p-[12px] text-[18px] "
         >
-          <p class="px-[30px] py-[75px] font-serif font-bold text-xl">
-            Database
-          </p>
+          <p class="">Database</p>
+          <h6 class="text-sm">description</h6>
         </div>
       </RouterLink>
 
       <RouterLink to="/business">
         <div
-          class="rounded-full bg-gray-200 border border-black hover:bg-pink-300 active:bg-pink-900 h-[200px] w-[190px]"
+          class=" w-[800px] hover:bg-zinc-200 bg-zinc-100 border p-[12px] text-[18px] "
         >
-          <p class="px-[55px] py-[75px] font-serif font-bold text-xl">
-            Business
-          </p>
+          <p class="">Business</p>
+          <h6 class="text-sm">description</h6>
         </div></RouterLink
       >
 
       <RouterLink to="/eop">
         <div
-          class="rounded-full bg-gray-200 border border-black hover:bg-red-300 active:bg-red-900 h-[200px] w-[190px]"
+          class="w-[800px] hover:bg-zinc-200 bg-zinc-100 border p-[12px] text-[18px] "
         >
-          <p class="px-[30px] py-[75px] font-serif font-bold text-xl">
-            Element of programming
-          </p>
+          <p class="">Element of programming</p>
+          <h6 class="text-sm">description</h6>
         </div></RouterLink
       >
       <RouterLink to="/mathcomp">
         <div
-          class="rounded-full bg-gray-200 border border-black hover:bg-green-300 active:bg-green-900 h-[200px] w-[190px]"
+          class="w-[800px] hover:bg-zinc-200 bg-zinc-100 border p-[12px] text-[18px] "
         >
-          <p
-            class="px-[30px] py-[75px] font-serif font-bold text-xl text-center"
-          >
-            Mathematic computing
-          </p>
+          <p class="">Mathematic computing</p>
+          <h6 class="text-sm">description</h6>
         </div></RouterLink
       >
     </div>
