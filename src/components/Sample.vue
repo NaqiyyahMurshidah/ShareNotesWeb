@@ -1,48 +1,59 @@
 <script setup>
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
 import PocketBase from "pocketbase";
-let sendnote = ref([]);
-const picUrl = ref("");
+
+
+
+
 const Title = ref("");
 const Author = ref("");
 const subject = ref("");
 const category = ref("");
 const inputValue = ref("");
-const file = ref("");
+let formData = new FormData();
+function onFileChange(event) {
+  console.log(event.target.files);
+  formData.append('file', event.target.files[0]);
+}
+onMounted(()=>{
+  const fileInput = document.getElementById('fileInput');
+  fileInput.addEventListener('change', function () {
+    for (let file of fileInput.files) {
+      formData.append('file', file);
+      console.log(fileInput.files.length);
+    }
+  });
+})
+
+// listen to file input changes and add the selected files to the form data
 
 async function testUpload() {
   const pb = new PocketBase("http://127.0.0.1:8090");
-  const formData = new FormData();
+//note_title
+  //author_name
+  //subject
+  //category
+  //file
+formData.append("note_title", Title.value);
+formData.append("author_name", Author.value);
+formData.append("subject", subject.value);
+formData.append("category", category.value);
+  try {
+    const record = await pb.collection("Notes").create(formData);
+    alert("DONE!");
+    console.log("record: ", record);
 
-  const fileInput = document.getElementById("fileInput");
-  for (let file of fileInput.files) {
-    formData.append("documents", file);
+  }catch (e) {
+    console.log(e);
+    alert("ERROR! " + e)
   }
 
-  formData.append("title", "Hello world!");
-
-  // example create data
-  const data = {
-    Note_id: 123,
-    note_title: Title.value,
-    Author_name: Author.value,
-    subject: subject.value,
-    category: category.value,
-    file: fileInput.value
-  };
-
-  const record = await pb.collection("Notes").create(data);
-
-  alert("DONE!");
 }
 
 function handleChange(event) {
   console.log(event.target.value);
 }
-function sendNote() {
-  Notes.value.push(inputValue.value);
-  inputValue.value = "";
-}
+
 </script>
 
 <template>
@@ -56,19 +67,23 @@ function sendNote() {
         </div>
 
         <div class="grid justify-items-center">
-          <form class="flex flex-col">
-            <label for="Note Title" class="text-gray-900 font-bold font-serif">
-              Note Title</label
-            >
-            <input
-              v-model="Title"
-              type="text"
-              name="Notetitle"
-              id="notetitle"
-              class="border bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-gray-700"
-              placeholder="Title"
-              @input="(event) => (text = console.logevent.target.value)"
-            />
+          <form @submit.prevent="testUpload" class="transparent py-1.5 pl-1 text-black placeholder:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-gray-700">
+             <div>
+               <label
+                for="Title"
+                class="text-gray-900 font-bold font-serif leading-6"
+              >
+                Title</label
+              >
+              <input
+                v-model="Title"
+                type="text"
+                name="title"
+                id="Title"
+                class="flex-1 w-full border bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-gray-700"
+                placeholder="Title"
+              />
+             </div>
 
             <div class="mt-5">
               <label
@@ -80,7 +95,7 @@ function sendNote() {
               <input
                 v-model="Author"
                 type="text"
-                name="Author"
+                name="author"
                 id="Author"
                 class="flex-1 w-full border bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-gray-700"
                 placeholder="Author name"
@@ -110,12 +125,13 @@ function sendNote() {
                 Upload file</label
               >
               <input
-                v-bind="fileInput"
                 type="file"
-                name="notefile"
+                @change="onFileChange($event)"
+                name="file"
                 id="fileInput"
                 class="block flex-1 border bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-gray-700"
                 placeholder="Subject/course"
+                accept="application/pdf application/vnd.ms-excel application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document"
               />
             </div>
             <div class="mt-5">
@@ -125,14 +141,18 @@ function sendNote() {
               >
                 Category *</label
               >
-              <input
+              <select
                 v-model="category"
                 type="text"
-                name="Category"
+                name="category"
                 id="category"
                 class="w-full flex-1 border bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-gray-700"
-                placeholder="category"
-              />
+
+              >
+                <option>Math</option>
+                <option>Physics</option>
+
+              </select>
             </div>
 
             <input type="button" v-model="inputValue" />
@@ -142,9 +162,7 @@ function sendNote() {
             >
               Submit
             </button>
-            <ul>
-              <li v-for="usernote in Notes">{{ usernote }}</li>
-            </ul>
+
           </form>
         </div>
       </div>
