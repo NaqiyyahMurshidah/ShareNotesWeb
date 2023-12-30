@@ -1,97 +1,56 @@
+<script setup>
+import { RouterLink } from "vue-router";
+</script>
+
 <template>
-  <div class="">
   <div
-    class="my-[5rem] bg-yellow-100 h-screen"
+    class="h-screen flex items-center justify-center"
+    style="
+      background-image: url(https://i.pinimg.com/564x/0a/c3/11/0ac3115c5dc0ed953de8802f915f43ca.jpg);
+      height: 800px;
+      width: auto;
+    "
   >
     <div
-      class="card animation "
+      class="bg-zinc-900 opacity-80 h-[30rem] w-[50rem] rounded-3xl text-white"
     >
-      <header class="card-header">
-        <h2 class="card-header-title">{{ title }}</h2>
-      </header>
-      <div class="card-content">
-        <div class="content">
-          <p>
-            <strong>{{ description }}:</strong> {{ value }}
-          </p>
-          <h4 class="">Additional Info</h4>
-          <ul>
-            <li>Information for high school students</li>
-            <li>Information for undergraduate students</li>
-            <li>General information</li>
-          </ul>
-          <br />
-          <div class="buttons gap-2">
-            <RouterLink to="/highschool">
-            <button
-              class="button is-primary transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
-            >
-              High School
-            </button></RouterLink>
-            <RouterLink to="/undergraduate">
-            <button
-              class="button is-primary transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
-            >
-              Undergraduate
-            </button></RouterLink>
-          </div>
-        </div>
+      <div class="text-white text-3xl flex justify-center p-8">
+        Welcome to share Notes!
+      </div>
+      <p class="px-9">
+        your gateway to a collaborative learning experience! We're thrilled to
+        have you join our community of eager minds. Here at ShareNotes, we
+        believe in the power of shared knowledge, and we invite you to embark on
+        a journey where learning becomes a collective effort."
+      </p>
+      <p class="px-9 pt-2">
+        Dive into a world where students like you come together to share their
+        insights, study materials, and helpful notes. Whether you're looking for
+        that perfect study guide, insightful lecture notes, or simply want to
+        contribute your expertise, ShareNotes is the place to be.
+      </p>
+      <p class="px-9 pt-2">
+        go ahead, start exploring, sharing, and learning collaboratively.
+        Welcome to ShareNotes – where the joy of knowledge is multiplied when
+        shared!"
+      </p>
+      <div class="flex flex-row items-center justify-center">
+        <button class="hover:transition ease-in-out delay-150">
+        <RouterLink to="/highschool">
+          <div
+            class="mx-9 my-20 w-44 p-7 bg-zinc-200 flex items-center justify-center font-semibold text-black h-5"
+          >
+            High school
+          </div></RouterLink
+        ></button>
+        <RouterLink to="/undergraduate">
+          <div
+            class="mx-9 my-20 w-44 p-7 bg-zinc-200 flex items-center justify-center font-semibold text-black h-5"
+          >
+            Undergraduate
+          </div></RouterLink
+        >
       </div>
     </div>
   </div>
-  </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      title: "Welcome to share notes",
-      description:
-        "This website are allow you to share your pretty notes among your friends",
-      //value: '',
-    };
-  },
-
-  theme: {
-    extend: {
-      animation: {
-        wiggle: "wiggle 1s ease-in-out infinite",
-      },
-    },
-  },
-};
-</script>
-
-<style scoped>
-@import "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css";
-
-.card {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.card-header {
-  background-color: #6f7479;
-  color: white;
-  padding: 15px;
-  border-radius: 5px 5px 0 0;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-.card-content ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.card-content li {
-  padding: 5px 0;
-}
-</style>
