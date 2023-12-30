@@ -13,11 +13,10 @@ function search() {}
   >
     <div class="flex flex-row justify-center items-center">
       <img
-        src="C:\Users\User\Downloads\Sharing is love.png"
-        object-contanin
+        src=""
         height="10"
         width="500rem"
-        class=""
+        class="object-contain"
       />
     </div>
 
@@ -26,7 +25,7 @@ function search() {}
         <div>
           <div class="relative">
             <img
-              src="C:\Users\User\Downloads\download__2_-removebg-preview.png"
+              src=""
               height="56"
               width="500rem"
               class="object-contain"
@@ -43,7 +42,7 @@ function search() {}
         <div>
           <div class="relative">
             <img
-              src="C:\Users\User\Downloads\download__2_-removebg-preview.png"
+              src=""
               height="56"
               width="500rem"
               class="object-contain"
