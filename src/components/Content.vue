@@ -38,14 +38,14 @@ import { RouterLink } from "vue-router";
         <button class="hover:transition ease-in-out delay-150">
         <RouterLink to="/highschool">
           <div
-            class="mx-9 my-20 w-44 p-7 bg-zinc-200 flex items-center justify-center font-semibold text-black h-5"
+            class="mx-9 my-20 w-44 p-7 rounded-xl bg-zinc-200 flex items-center justify-center font-semibold text-black h-5"
           >
             High school
           </div></RouterLink
         ></button>
         <RouterLink to="/undergraduate">
           <div
-            class="mx-9 my-20 w-44 p-7 bg-zinc-200 flex items-center justify-center font-semibold text-black h-5"
+            class="mx-9 my-20 w-44 p-7 rounded-xl bg-zinc-200 flex items-center justify-center font-semibold text-black h-5"
           >
             Undergraduate
           </div></RouterLink
