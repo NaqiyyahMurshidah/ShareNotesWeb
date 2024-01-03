@@ -39,6 +39,19 @@ async function testUpload() {
     const record = await pb.collection("Notes").create(formData);
     alert("DONE!");
     console.log("record: ", record);
+
+    // reset value after successful submission
+     Title.value = "";
+    Author.value = "";
+    subject.value = "";
+    category.value = "";
+    inputValue.value = "";
+    formData = new FormData();  //reset the formdata 
+
+    //reset the file input after successful submission
+    const fileInput = document.getElementById("fileInput");
+    fileInput.value = null;
+
   } catch (e) {
     console.log(e);
     alert("ERROR! " + e);
@@ -52,7 +65,7 @@ function handleChange(event) {
 
 <template>
   <div
-    class="bg-cover min-h-screen md:h-screen flex items-center justify-center"
+    class="bg-cover min-h-screen flex items-center justify-center"
     style="
       background-image: url(https://www.shutterstock.com/image-photo/soft-gradient-background-vibrant-blurred-260nw-2296727271.jpg);
       height: 800px;
@@ -158,7 +171,7 @@ function handleChange(event) {
               <div class="p-3">
                 <input type="button" v-model="inputValue" />
                 <button
-                  @click="testUpload"
+                  
                   class="bg-zinc-300 text-black p-2 px-28 rounded-md mt-8 hover:bg-zinc-400"
                 >
                   Submit
