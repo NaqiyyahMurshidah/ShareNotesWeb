@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.1.4",
+    "@vueuse/core": "^10.11.0",
     "pocketbase": "^0.20.1",
     "vue": "^3.3.11",
     "vue-horizontal": "^1.0.2",

@@ -1,15 +1,29 @@
 <script>
-  
+export default {
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
+  methods: {
+    toggle() {
+      this.isOpen = !this.isOpen;
+    },
+  },
+};
 </script>
 
 <template>
-  <div class="flex flex-row bg-gray-200">
+  <div class="flex flex-row bg-gray-200" id="app">
     <div class="Sidebar bg-[#0C1924] w-80 h-screen">
       <div
         class="file1 text-gray-50 ml-10 mt-10 flex flex-row items-center gap-7"
       >
         <div class="flex flex-col">
-          <div class="flex flex-row items-center gap-7 hover:bg-slate-700 w-60 p-2 rounded-xl">
+          <div
+            v-on:click="isOpen = !isOpen"
+            class="flex flex-row items-center gap-7 hover:bg-slate-700 w-60 p-2 rounded-xl"
+          >
             <div class="w-8 h-8 relative">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +73,7 @@
             </div>
           </div>
           <!-- the course -->
-          <div class="courses">
+          <div v-show="isOpen" class="courses">
             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
@@ -79,7 +93,7 @@
               </div>
               <p class="text-[14px]">CSCI 1300</p>
             </div>
-             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
+            <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +112,7 @@
               </div>
               <p class="text-[14px]">CSCI 1301</p>
             </div>
-             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
+            <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +131,7 @@
               </div>
               <p class="text-[14px]">CSCI 1302</p>
             </div>
-             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
+            <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +150,7 @@
               </div>
               <p class="text-[14px]">CSCI 1303</p>
             </div>
-             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
+            <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +169,7 @@
               </div>
               <p class="text-[14px]">CSCI 1304</p>
             </div>
-             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
+            <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +196,10 @@
         class="file1 text-gray-50 ml-10 mt-2 flex flex-row items-center gap-7"
       >
         <div class="flex flex-col">
-          <div class="flex flex-row items-center gap-7 hover:bg-slate-700 w-60 p-2 rounded-xl">
+          <div
+            v-on:click="isOpen = !isOpen"
+            class="flex flex-row items-center gap-7 hover:bg-slate-700 w-60 p-2 rounded-xl"
+          >
             <div class="w-8 h-8 relative">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -218,8 +235,8 @@
             </div>
           </div>
           <!-- the courses -->
-          <div class="courses">
-             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
+          <div v-show="isOpen" class="courses">
+            <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -246,7 +263,9 @@
         class="file1 text-gray-50 ml-10 mt-2 flex flex-row items-center gap-7"
       >
         <div class="flex flex-col">
-          <div class="flex flex-row items-center gap-7 hover:bg-slate-700 w-60 p-2 rounded-xl">
+          <div
+            class="flex flex-row items-center gap-7 hover:bg-slate-700 w-60 p-2 rounded-xl"
+          >
             <div class="w-8 h-8 relative">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -283,7 +302,7 @@
           </div>
           <!-- the course -->
           <div class="courses">
-             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
+            <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -310,7 +329,9 @@
         class="file1 text-gray-50 ml-10 mt-2 flex flex-row items-center gap-7"
       >
         <div class="flex flex-col">
-          <div class="flex flex-row items-center gap-7 hover:bg-slate-700 w-60 p-2 rounded-xl">
+          <div
+            class="flex flex-row items-center gap-7 hover:bg-slate-700 w-60 p-2 rounded-xl"
+          >
             <div class="w-8 h-8 relative">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -347,7 +368,7 @@
           </div>
           <!-- the course -->
           <div>
-             <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
+            <div class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2">
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
