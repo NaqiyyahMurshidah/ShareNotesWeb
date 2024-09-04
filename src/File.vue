@@ -1,49 +1,73 @@
-<script>
-export default {
-  data() {
-    return {
-      years: [
-        {
-          id: 1,
-          name: "Year 1",
-          isOpen: false,
-          courses: ['CSCI 1300', 'CSCI 1301', 'CSCI 1302', 'CSCI 1303', 'CSCI 1304', 'CSCI 1305']
-        },
-        {
-          id: 2,
-          name: "Year 2",
-          isOpen: false,
-          courses: ['CSCI 1300']
-        },
-        {
-          id: 3,
-          name: "Year 3",
-          isOpen: false,
-          courses: ['CSCI 1300']
-        },
-        {
-          id: 4,
-          name: "Year 4",
-          isOpen: false,
-          courses: ['CSCI 1300']
-        }
-      ]
-    };
+<script setup>
+import { ref, onMounted } from "vue";
+import PocketBase from "pocketbase";
+
+// Initialize PocketBase
+const pb = new PocketBase("http://127.0.0.1:8090");
+
+// Define reactive data
+const years = ref([
+  {
+    id: 1,
+    name: "Year 1",
+    isOpen: false,
+    courses: [
+      "CSCI 1300",
+      "CSCI 1301",
+      "CSCI 1302",
+      "CSCI 1303",
+      "CSCI 1304",
+      "CSCI 1305",
+    ],
   },
-  methods: {
-    toggle(index) {
-      this.years[index].isOpen = !this.years[index].isOpen;
-    }
+  { id: 2, name: "Year 2", isOpen: false, courses: ["CSCI 2300"] },
+  { id: 3, name: "Year 3", isOpen: false, courses: ["CSCI 3300"] },
+  { id: 4, name: "Year 4", isOpen: false, courses: ["CSCI 4300"] },
+]);
+
+const files = ref([]);
+const selectedFile = ref(null);
+
+// Fetch files from PocketBase
+const fetchFiles = async () => {
+  try {
+    const records = await pb.collection("CSCI_1300").getList(200);
+    records.items.forEach((record) => {
+      const file = record.category[0];
+      files.value.push({
+        id: file.id,
+        Title: file.Title,
+        Category: file.Category,
+        path: `${record.collectionId}/${record.id}/${file.Title}`,
+      });
+    });
+  } catch (error) {
+    console.error("Error fetching records:", error);
   }
 };
 
+// Toggle the visibility of courses
+const toggle = (index) => {
+  years.value[index].isOpen = !years.value[index].isOpen;
+};
+
+//select a file to display
+const selectFile = (file) => {
+  selectedFile.value = file;
+};
+
+// Fetch files when the component is mounted
+onMounted(() => {
+  fetchFiles();
+});
 </script>
 
 <template>
   <div class="flex flex-row bg-gray-200" id="app">
     <div class="Sidebar bg-[#0C1924] w-80 h-screen">
       <div
-        v-for="(year, yearIndex) in years" :key="year.id"
+        v-for="(year, yearIndex) in years"
+        :key="year.id"
         class="file1 text-gray-50 ml-10 mt-10 flex flex-row items-center gap-7"
       >
         <div class="flex flex-col">
@@ -86,11 +110,13 @@ export default {
             </div>
           </div>
           <!-- the course -->
-            <!-- v-for="(course, courseIndex) is the looping to get the index -->
+          <!-- v-for="(course, courseIndex) is the looping to get the index -->
           <div v-show="year.isOpen" class="courses">
-            <div v-for="(course, courseIndex) in year.courses"
-              :key="courseIndex" 
-            class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2 transition duration-75">
+            <div
+              v-for="(course, courseIndex) in year.courses"
+              :key="courseIndex"
+              class="flex flex-row items-center gap-2 ml-10 pl-5 mt-2 transition duration-75"
+            >
               <div class="h-5 w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -107,16 +133,40 @@ export default {
                   />
                 </svg>
               </div>
-              <p class="text-[14px]">  {{ course }}</p>
+              <p class="text-[14px]" v-on:click="selectCourse(category)">
+                {{ course }}
+              </p>
             </div>
-            
           </div>
         </div>
+      </div>
+    </div>
+    <!-- the file section -->
+    <div class="flex flex-col p-4">
+      <div v-for="file in files" :key="file.id" class="mb-4">
+        <a
+          @click.prevent="selectFile(file)"
+          href="#"
+          class="text-blue-500 underline"
+          >{{ file.Title }}</a
+        >
+      </div>
+      <div v-if="selectedFile" class="file-viewer">
+        <h3>{{ selectedFile.Title }}</h3>
+        <!-- Display PDF -->
+        <iframe
+          v-if="selectedFile.Title.endsWith('.pdf')"
+          :src="`http://localhost:8090/api/files/CSCI_1300/${selectedFile.id}/${selectedFile.Title}/${selectedFile.Category}`"
+          width="600"
+          height="800"
+        ></iframe>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-
+.file-viewer {
+  margin-top: 20px;
+}
 </style>

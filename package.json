@@ -11,7 +11,7 @@
   "dependencies": {
     "@heroicons/vue": "^2.1.4",
     "@vueuse/core": "^10.11.0",
-    "pocketbase": "^0.20.1",
+    "pocketbase": "^0.20.3",
     "vue": "^3.3.11",
     "vue-horizontal": "^1.0.2",
     "vue-router": "^4.2.5"
